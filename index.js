@@ -173,14 +173,131 @@ console.log(calculateTotal(carts));
 //}
 //console.log(findUserByName(userss, "Alice"));
 
-const users = [
-    { id: 1, name: "Alice" },
-    { id: 2, name: "Bob" },
+//const users = [
+//   { id: 1, name: "Alice" },
+//  { id: 2, name: "Bob" },
+//];
+//function addUser(users, newUser) {
+// clone = JSON.parse(JSON.stringify(users));
+// clone.push(newUser);
+//    return clone;
+//}
+//console.log(addUser(users, { id: 3, name: "Charlie" }));
+//console.log(users);
+
+
+
+let person = document.querySelector('.person');
+
+const students = [
+    { name: "Аня", score: 75 },
+    { name: "Борис", score: 55 },
+    { name: "Вика", score: 90 },
+    { name: "Григорий", score: 45 }
 ];
-function addUser(users, newUser) {
-    clone = JSON.parse(JSON.stringify(users));
-    clone.push(newUser);
-    return clone;
+function getTopStudents(students) {
+    let topStudents = students.filter(student => student.score >= 60);
+    return topStudents;
 }
-console.log(addUser(users, { id: 3, name: "Charlie" }));
-console.log(users);
+console.log(getTopStudents(students));
+let bestStudents = getTopStudents(students);
+bestStudents.forEach(student => {
+    person.insertAdjacentHTML('beforeend',
+        `<div class="person">${student.name} - ${student.score}</div>`);
+});
+
+
+people = document.querySelector(".players")
+const players = [
+    { name: "Алексей", points: 150 },
+    { name: "Мария", points: 200 },
+    { name: "Иван", points: 180 },
+    { name: "Светлана", points: 120 },
+    { name: "Дмитрий", points: 170 }
+];
+function getPlayers(players) {
+    const bestPlayers = players.sort((a, b) => b.points - a.points);
+    return bestPlayers;
+}
+console.log(getPlayers(players));
+
+
+getPlayers(players);
+let topThree = players.slice(0, 3);
+
+topThree.forEach(player => {
+    people.insertAdjacentHTML('beforeend',
+        `<div class="player">${player.name} - ${player.points}</div>`);
+});
+
+
+const car
+    = {
+    make: "Toyota",
+    model: "Camry",
+    year: 2020,
+    color: "Blue",
+    getCarInfo: function () {
+        return `${this.year} ${this.make} ${this.model} in ${this.color}`;
+    }
+};
+console.log(car.getCarInfo());
+
+
+const user1 = {
+    name: "John",
+    age: 30,
+    email: "john@example.com",
+    getUserInfo: function (x) {
+        return `${x} ${this.name} is ${this.age} years old and can be contacted at ${this.email}`;
+    }
+};
+console.log(user1.getUserInfo());
+const nextUser = {
+    name: "Jane",
+
+};
+
+console.log(user1.getUserInfo.call(nextUser, "hello "));//object
+console.log(user1.getUserInfo.apply(nextUser, ["hi "]));//obj
+console.log(user1.getUserInfo.bind(nextUser));//function
+const boundGetUserInfo = user1.getUserInfo.bind(nextUser);
+console.log(boundGetUserInfo("Hey "));
+
+//Используем apply
+//Условие:
+//Создай объект calculator с методом sum(a, b) который возвращает сумму.
+//Создай другой объект calc2 с полем factor. Используй apply, чтобы вызвать метод sum объекта calculator для calc2.
+
+const calk = {
+    sum(a, b) {
+        return a + b;
+    }
+};
+
+const calc2 = {
+    factor: 1
+};
+
+console.log(calk.sum.apply(calc2, [5, 10]));
+console.log(calk.sum.call(calc2, 20, 30));
+console.log(calk.sum.bind(calc2, 1, 2)());
+
+
+//Задача 5: Практика с массивом объектов и call
+//Условие:
+//Есть массив объектов пользователей:
+
+const users = [
+  { name: "Anna" },
+  { name: "Mark" },
+  { name: "Tom" }
+];
+
+function introduce(greeting) {
+    return `${greeting}, ${this.name}!`;
+}
+
+users.forEach(user => {
+    console.log(introduce.call(user, "Hello"));
+});
